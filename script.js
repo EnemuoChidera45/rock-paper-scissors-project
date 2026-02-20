@@ -85,16 +85,20 @@ function playRound(humanChoice) {
 
   if (humanChoice === computerChoice) {
     roundResult.textContent = `It's a tie😐`;
-  } else if (
-    (humanChoice === "rock" && computerChoice === "scissors") ||
-    (humanChoice === "paper" && computerChoice === "rock") ||
-    (humanChoice === "scissors" && computerChoice === "paper")
-  ) {
-    humanScore++;
-    roundResult.textContent = `You win😒`;
   } else {
-    computerScore++;
-    roundResult.textContent = `You lose this round🤣😂`;
+    switch (true) {
+      case humanChoice === "rock" && computerChoice === "scissors":
+      case humanChoice === "paper" && computerChoice === "rock":
+      case humanChoice === "scissors" && computerChoice === "paper":
+        humanScore++;
+        roundResult.textContent = `You win😒`;
+        break;
+
+      default:
+        computerScore++;
+        roundResult.textContent = `You lose this round🤣😂`;
+        break;
+    }
   }
 
   playerScoreDisplay.textContent = humanScore;
@@ -106,7 +110,6 @@ function playRound(humanChoice) {
     finalWinner.textContent = "Sore loser!!!🤣🤣🫵🏾";
   }
 }
-
 document
   .querySelector("#rock")
   .addEventListener("click", () => playRound("rock"));
